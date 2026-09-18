@@ -1,0 +1,27 @@
+{
+  "employee": [
+    {
+      "name": "shubharaj",
+      "username": "shubha",
+      "email": "shubharajsubedi7@gmail.com",
+      "department": "IT",
+      "id": "NKnte0KN54U"
+    },
+    {
+      "name": "shubham ",
+      "username": "SHUBHAM",
+      "email": "shubham@21gmail.com",
+      "department": "Finance",
+      "id": "EaH62r_7bMY"
+    }
+  ],
+  "admin": [
+    {
+      "name": "shubharaj",
+      "email": "shubharaj@32gmail.com",
+      "phoneNumber": "9840323342",
+      "id": "_qdTYwx9tgQ"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
