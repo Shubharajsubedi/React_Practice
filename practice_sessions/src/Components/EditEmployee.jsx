@@ -1,42 +1,17 @@
-import { useState,useEffect } from "react";
+import { useState } from "react";
 
 function EditEmployee({newEmployee}){
-    // const [employee, setEmployee]=useState([])
-    // const [showdata,setShowData]= useState(false)
     const [selectedEmployee, setSelectedEmployee] = useState(newEmployee);
     console.log(newEmployee)
     const [editing, setEditing] = useState(true);
 
-    // useEffect(()=>{
-        // fetch("http://localhost:3000/employee")
-        // .then(res => res.json())
-        // .then(data => {
-        //     setEmployee(data)
-        // })
-
-        // .catch(error => {
-        //     console.log("Error",error)
-        // })
-        // setSelectedEmployee(newEmployee);
-    // },[newEmployee]);
-       
-    // const handleEdit = () => {
-
-    //     if (newEmployee) {
-    //         setEmployee(prevEmployees => [
-    //             ...prevEmployees,
-    //             newEmployee
-    //         ]);
-    //     }
-        
-
-    // };
+    
 
      const handleChange = (e) => {
 
         setSelectedEmployee({
             ...selectedEmployee,
-            [e.target.name]: e.target.value
+            [e.target.data]: e.target.newdata
         });
 
     };
@@ -58,24 +33,7 @@ function EditEmployee({newEmployee}){
         )
             .then(res => res.json())
 
-            .then(updatedEmployee => {
-
-                // Update employee in table
-                setEmployee(prevEmployees =>
-                    prevEmployees.map(emp =>
-                        emp.id === updatedEmployee.id
-                            ? updatedEmployee
-                            : emp
-                    )
-                );
-
-                // Update selected employee
-                setSelectedEmployee(updatedEmployee);
-
-                // Stop editing
-                setEditing(false);
-
-            })
+            
 
             .catch(error => {
                 console.log(
@@ -89,26 +47,7 @@ function EditEmployee({newEmployee}){
     return (
          <div>
 
-            {/* <h1>GET - Employee Data</h1>
-
-            {showdata && employee.map(employee => (
-
-                <div key={employee.id}>
-
-                    <h2>{employee.name}</h2>
-
-                    <p>ID: {employee.id}</p>
-                    <p>Username: {employee.username}</p>
-                    <p>Email: {employee.email}</p>
-                    <p>Department: {employee.department}</p>
-
-                    <hr />
-
-                </div>
-
-            ))}
-
-            <button onClick={()=> setShowData(true)}>Click to view Employees</button> */}
+           
 
              {selectedEmployee && (
 
@@ -122,10 +61,6 @@ function EditEmployee({newEmployee}){
 
 
                     {editing ? (
-
-                        /* =====================
-                           EDIT MODE
-                        ====================== */
 
                         <div>
 
@@ -202,10 +137,7 @@ function EditEmployee({newEmployee}){
 
                     ) : (
 
-                        /* =====================
-                           VIEW MODE
-                        ====================== */
-
+                      
                         <div>
 
                             <p>

@@ -1,18 +1,11 @@
 {
   "employee": [
     {
-      "name": "Shubham Subedi",
-      "username": "Subedi",
-      "email": "shubharajsubedi7@gmail.com",
-      "department": "It",
-      "id": "9T8IeiODwwI"
-    },
-    {
-      "name": "",
-      "username": "",
-      "email": "",
-      "department": "",
-      "id": "-FmDruzUuNA"
+      "name": "shubham ",
+      "username": "shubu",
+      "email": "shubham@21gmail.com",
+      "department": "Finance",
+      "id": "EaH62r_7bMY"
     }
   ],
   "admin": [
