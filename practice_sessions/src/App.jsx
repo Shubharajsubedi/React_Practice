@@ -1,21 +1,16 @@
-import Delete from "../CRUD/Delete";
-import Get from "../CRUD/Get";
-import Patch from "../CRUD/Patch";
-import Post from "../CRUD/Post";
-import PostAdmin from "../CRUD/PostAdmin";
-import Put from "../CRUD/Put";
+import PostEmployee from "../FULL_UI_CRUD/Admin";
+import GetEmployee from "../FULL_UI_CRUD/AdminSetData";
+
 
 
 function App() {
     return (
-        <div>
-            <Post/>
-            <Get/>
-            <Put/>
-            <Patch/>
-            <Delete/>
-            <PostAdmin/>
-        </div>
+        
+       <div>
+       <PostEmployee/>
+       <GetEmployee/>
+       </div>     
+        
     );
 }
 

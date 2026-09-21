@@ -1,18 +1,18 @@
 {
   "employee": [
     {
-      "name": "shubharaj",
-      "username": "shubha",
+      "name": "Shubham Subedi",
+      "username": "Subedi",
       "email": "shubharajsubedi7@gmail.com",
-      "department": "IT",
-      "id": "NKnte0KN54U"
+      "department": "It",
+      "id": "9T8IeiODwwI"
     },
     {
-      "name": "shubham ",
-      "username": "SHUBHAM",
-      "email": "shubham@21gmail.com",
-      "department": "Finance",
-      "id": "EaH62r_7bMY"
+      "name": "",
+      "username": "",
+      "email": "",
+      "department": "",
+      "id": "-FmDruzUuNA"
     }
   ],
   "admin": [
