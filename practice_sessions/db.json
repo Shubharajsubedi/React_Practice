@@ -6,13 +6,6 @@
       "thought": "hello",
       "date": "1212-12-12",
       "id": "XLQRjcabDs4"
-    },
-    {
-      "name": "",
-      "email": "",
-      "thought": "",
-      "date": "",
-      "id": "ejUsKiIjVxg"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

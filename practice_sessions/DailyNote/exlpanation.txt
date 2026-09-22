@@ -1,0 +1,1032 @@
+// ============================================================
+// 1. IMPORTS
+// ============================================================
+
+// useState → allows us to create state variables.
+// useEffect → allows us to run code when the component loads.
+import { useState, useEffect } from "react";
+
+
+// Import API functions from our PostApi file.
+//
+// These functions are responsible for communicating with
+// the backend.
+//
+// getPostAdmin()    → GET    → get all posts
+// createPostAdmin() → POST   → create a new post
+// updatePostAdmin() → PUT    → update an existing post
+// deletePostAdmin() → DELETE → delete a post
+import {
+    getPostAdmin,
+    createPostAdmin,
+    updatePostAdmin,
+    deletePostAdmin
+} from "../src/api/PostApi";
+
+
+// ============================================================
+// 2. COMPONENT
+// ============================================================
+
+// This is our React component.
+//
+// Everything inside this function belongs to the AdminPost
+// component.
+function AdminPost() {
+
+
+    // ========================================================
+    // 3. FORM STATE
+    // ========================================================
+
+    // name → stores whatever the user types into the Name input.
+    //
+    // setName → function used to change the name.
+    //
+    // "" → initial value is an empty string.
+    const [name, setName] = useState("");
+
+
+    // email → stores the email input.
+    //
+    // setEmail → changes the email.
+    //
+    // Initially email is empty.
+    const [email, setEmail] = useState("");
+
+
+    // thought → stores the content of the note.
+    //
+    // setThought → changes the thought.
+    //
+    // Initially it is empty.
+    const [thought, setThought] = useState("");
+
+
+    // date → stores the selected date.
+    //
+    // setDate → changes the date.
+    //
+    // Initially it is empty.
+    const [date, setDate] = useState("");
+
+
+    // ========================================================
+    // 4. APPLICATION STATE
+    // ========================================================
+
+    // notes → stores ALL notes received from the backend.
+    //
+    // Example:
+    //
+    // notes = [
+    //     {
+    //         id: 1,
+    //         name: "Shubham",
+    //         email: "abc@gmail.com",
+    //         thought: "Learning React",
+    //         date: "2026-09-22"
+    //     },
+    //
+    //     {
+    //         id: 2,
+    //         name: "Ram",
+    //         email: "ram@gmail.com",
+    //         thought: "Learning JavaScript",
+    //         date: "2026-09-21"
+    //     }
+    // ]
+    //
+    // Initially there are no notes, so we use [].
+    const [notes, setNotes] = useState([]);
+
+
+    // editId → stores the ID of the note currently being edited.
+    //
+    // Initially null means:
+    //
+    // "We are NOT editing anything."
+    //
+    // Example:
+    //
+    // editId = null
+    //     ↓
+    // CREATE MODE
+    //
+    // editId = 5
+    //     ↓
+    // EDIT NOTE WITH ID 5
+    const [editId, setEditId] = useState(null);
+
+
+    // ========================================================
+    // 5. READ DATA FROM BACKEND
+    // ========================================================
+
+    // useEffect allows us to execute code when the component
+    // loads.
+    //
+    // We want to get all notes from the backend when
+    // AdminPost first appears on the screen.
+    useEffect(() => {
+
+
+        // Create an asynchronous function.
+        //
+        // We use async because communicating with the backend
+        // takes time.
+        const fetchPosts = async () => {
+
+
+            // try means:
+            //
+            // "Try to execute this code."
+            //
+            // If something goes wrong, the catch block will
+            // handle the error.
+            try {
+
+
+                // Call our API function.
+                //
+                // getPostAdmin() sends a request to the backend.
+                //
+                // await means:
+                //
+                // "Wait until the backend sends the response."
+                const res = await getPostAdmin();
+
+
+                // res contains the response from the backend.
+                //
+                // Usually with Axios:
+                //
+                // res.data
+                //
+                // contains the actual data returned by the server.
+                //
+                // Example:
+                //
+                // res.data = [
+                //     { id: 1, name: "Shubham" },
+                //     { id: 2, name: "Ram" }
+                // ]
+                //
+                // Array.isArray() checks whether res.data is
+                // actually an array.
+                //
+                // If it is an array:
+                //
+                //     setNotes(res.data)
+                //
+                // Otherwise:
+                //
+                //     setNotes([])
+                //
+                // This prevents our application from trying to
+                // use something that isn't an array.
+                setNotes(
+                    Array.isArray(res.data)
+                        ? res.data
+                        : []
+                );
+
+
+            // If getPostAdmin() fails, this block executes.
+            } catch (error) {
+
+
+                // Print the error in the browser console.
+                //
+                // Useful for debugging.
+                console.error(
+                    "Error fetching notes:",
+                    error
+                );
+            }
+        };
+
+
+        // Actually call the function we created above.
+        //
+        // Defining a function does NOT execute it.
+        //
+        // fetchPosts() executes it.
+        fetchPosts();
+
+
+    // [] means:
+    //
+    // Run this useEffect when the component is mounted.
+    //
+    // In simple terms:
+    //
+    // "When AdminPost loads, fetch the notes."
+    }, []);
+
+
+    // ========================================================
+    // 6. CREATE + UPDATE
+    // ========================================================
+
+    // This function runs when the form is submitted.
+    //
+    // It handles BOTH:
+    //
+    // CREATE
+    //
+    // and
+    //
+    // UPDATE
+    //
+    // We decide which one to perform using editId.
+    const handleFormSubmit = async (e) => {
+
+
+        // Normally submitting an HTML form causes the browser
+        // to reload the page.
+        //
+        // preventDefault() stops that default behavior.
+        //
+        // React can then handle the form submission itself.
+        e.preventDefault();
+
+
+        // Create an object containing all form data.
+        //
+        // This object will be sent to the backend.
+        //
+        // Because of JavaScript shorthand:
+        //
+        // { name, email, thought, date }
+        //
+        // is the same as:
+        //
+        // {
+        //     name: name,
+        //     email: email,
+        //     thought: thought,
+        //     date: date
+        // }
+        const notePayload = {
+            name,
+            email,
+            thought,
+            date
+        };
+
+
+        // Try to send the data to the backend.
+        try {
+
+
+            // =================================================
+            // UPDATE MODE
+            // =================================================
+
+            // If editId is NOT null, we are editing a note.
+            //
+            // Example:
+            //
+            // editId = 5
+            //
+            // means:
+            //
+            // "Update note #5."
+            if (editId !== null) {
+
+
+                // Call the update API.
+                //
+                // Pass two things:
+                //
+                // 1. editId
+                // 2. new note data
+                //
+                // Example:
+                //
+                // updatePostAdmin(
+                //     5,
+                //     {
+                //         name: "New Name",
+                //         email: "new@gmail.com",
+                //         thought: "Updated thought",
+                //         date: "2026-09-22"
+                //     }
+                // )
+                const res = await updatePostAdmin(
+                    editId,
+                    notePayload
+                );
+
+
+                // Print the updated note in the console.
+                console.log(
+                    "Updated Note:",
+                    res.data
+                );
+
+
+                // Update our local React state.
+                //
+                // map() goes through every note.
+                //
+                // If the note's ID matches editId:
+                //
+                //     replace it with res.data
+                //
+                // Otherwise:
+                //
+                //     keep the old note.
+                //
+                // Example:
+                //
+                // notes:
+                //
+                // [
+                //     { id: 1, name: "Ram" },
+                //     { id: 2, name: "Shyam" },
+                //     { id: 3, name: "Hari" }
+                // ]
+                //
+                // editId = 2
+                //
+                // Result:
+                //
+                // [
+                //     { id: 1, name: "Ram" },
+                //     { id: 2, name: "UPDATED Shyam" },
+                //     { id: 3, name: "Hari" }
+                // ]
+                setNotes(
+                    notes.map(note =>
+                        note.id === editId
+                            ? res.data
+                            : note
+                    )
+                );
+
+
+                // We finished editing.
+                //
+                // null means:
+                //
+                // "No note is currently being edited."
+                setEditId(null);
+
+
+            // =================================================
+            // CREATE MODE
+            // =================================================
+
+            // If editId is null, we create a new note.
+            } else {
+
+
+                // Send notePayload to the backend.
+                //
+                // createPostAdmin() will normally make a POST
+                // request.
+                const res = await createPostAdmin(
+                    notePayload
+                );
+
+
+                // Show the newly created note in the console.
+                console.log(
+                    "Created Note:",
+                    res.data
+                );
+
+
+                // Add the newly created note to our existing
+                // notes array.
+                //
+                // ...notes means:
+                //
+                // "Take all existing notes."
+                //
+                // Then res.data adds the new note.
+                //
+                // Example:
+                //
+                // Before:
+                //
+                // [note1, note2]
+                //
+                // After:
+                //
+                // [note1, note2, newNote]
+                setNotes([
+                    ...notes,
+                    res.data
+                ]);
+            }
+
+
+            // After CREATE or UPDATE,
+            // clear all form fields.
+            clearForm();
+
+
+        // If CREATE or UPDATE fails:
+        } catch (error) {
+
+
+            // Print the error.
+            //
+            // error.response?.data
+            //
+            // tries to show the error returned by the backend.
+            //
+            // ?. is optional chaining.
+            //
+            // It prevents an error if response doesn't exist.
+            //
+            // If response.data doesn't exist, it uses:
+            //
+            // error.message
+            console.error(
+                "Error submitting form:",
+                error.response?.data ||
+                error.message
+            );
+        }
+    };
+
+
+    // ========================================================
+    // 7. START EDITING A NOTE
+    // ========================================================
+
+    // This function is called when the user clicks
+    // the Edit button.
+    //
+    // It receives the complete note object.
+    const startEdit = (note) => {
+
+
+        // Store the ID of the note we are editing.
+        //
+        // Example:
+        //
+        // note.id = 5
+        //
+        // editId becomes 5.
+        setEditId(note.id);
+
+
+        // Put the existing note's name into the form.
+        //
+        // This makes the name appear inside the input.
+        setName(note.name);
+
+
+        // Put the existing email into the form.
+        setEmail(note.email);
+
+
+        // Put the existing thought into the form.
+        setThought(note.thought);
+
+
+        // Put the existing date into the form.
+        setDate(note.date);
+    };
+
+
+    // ========================================================
+    // 8. DELETE NOTE
+    // ========================================================
+
+    // This function receives the ID of the note we want
+    // to delete.
+    const handleDelete = async (id) => {
+
+
+        // Show a confirmation popup.
+        //
+        // window.confirm() returns:
+        //
+        // true  → user clicked OK
+        // false → user clicked Cancel
+        //
+        // If the user clicked Cancel:
+        //
+        // !false = true
+        //
+        // so return; stops the function.
+        if (
+            !window.confirm(
+                "Are you sure you want to delete this note?"
+            )
+        ) return;
+
+
+        // Try to delete the note.
+        try {
+
+
+            // Send the ID to the backend.
+            //
+            // This normally makes a DELETE request.
+            await deletePostAdmin(id);
+
+
+            // Print a success message.
+            console.log(
+                `Deleted note ${id} successfully`
+            );
+
+
+            // Remove the deleted note from our local state.
+            //
+            // filter() creates a NEW array.
+            //
+            // It keeps every note whose ID is NOT equal to
+            // the deleted ID.
+            //
+            // Example:
+            //
+            // notes:
+            //
+            // [
+            //     { id: 1 },
+            //     { id: 2 },
+            //     { id: 3 }
+            // ]
+            //
+            // id = 2
+            //
+            // result:
+            //
+            // [
+            //     { id: 1 },
+            //     { id: 3 }
+            // ]
+            setNotes(
+                notes.filter(
+                    note => note.id !== id
+                )
+            );
+
+
+            // Check whether the note we just deleted was
+            // also the note currently being edited.
+            //
+            // Example:
+            //
+            // editId = 5
+            // id = 5
+            //
+            // Then we should clear the form.
+            if (editId === id) {
+                clearForm();
+            }
+
+
+        // If DELETE fails:
+        } catch (error) {
+
+
+            // Show the error in the console.
+            console.error(
+                "Error deleting note:",
+                error.response?.data ||
+                error.message
+            );
+        }
+    };
+
+
+    // ========================================================
+    // 9. CLEAR FORM
+    // ========================================================
+
+    // This helper function resets the entire form.
+    const clearForm = () => {
+
+
+        // Clear name.
+        setName("");
+
+
+        // Clear email.
+        setEmail("");
+
+
+        // Clear thought.
+        setThought("");
+
+
+        // Clear date.
+        setDate("");
+
+
+        // Stop editing.
+        //
+        // null = no note is being edited.
+        setEditId(null);
+    };
+
+
+    // ========================================================
+    // 10. RETURN THE UI
+    // ========================================================
+
+    // Everything inside return() is what React displays
+    // on the webpage.
+    return (
+
+
+        // Main container.
+        //
+        // style={{ padding: "20px" }}
+        //
+        // adds 20px padding around the entire component.
+        <div style={{ padding: "20px" }}>
+
+
+            // =================================================
+            // HEADING
+            // =================================================
+
+            // This heading changes depending on editId.
+            //
+            // If editId exists:
+            //
+            //     ✏️ Edit Note
+            //
+            // Otherwise:
+            //
+            //     ➕ Add Daily Note
+            <h2>
+                {
+                    editId
+                        ? "✏️ Edit Note"
+                        : "➕ Add Daily Note"
+                }
+            </h2>
+
+
+            // =================================================
+            // FORM
+            // =================================================
+
+            // When the form is submitted,
+            // handleFormSubmit() will execute.
+            <form onSubmit={handleFormSubmit}>
+
+
+                // Name label.
+                <label>Name:</label>
+
+
+                // Name input.
+                <input
+                    type="text"
+
+                    // React controls the value.
+                    //
+                    // Whatever is inside name state
+                    // appears inside this input.
+                    value={name}
+
+                    // Placeholder text shown when input is empty.
+                    placeholder="Enter Name"
+
+                    // When user types:
+                    //
+                    // e.target.value = what user typed.
+                    //
+                    // setName() stores it in React state.
+                    onChange={(e) =>
+                        setName(e.target.value)
+                    }
+
+                    // User cannot submit an empty field.
+                    required
+                />
+
+
+                // Line breaks.
+                <br />
+                <br />
+
+
+                // Email label.
+                <label>Email:</label>
+
+
+                // Email input.
+                <input
+                    type="email"
+
+                    // Current email state.
+                    value={email}
+
+                    placeholder="Enter Email"
+
+                    // Update email state whenever user types.
+                    onChange={(e) =>
+                        setEmail(e.target.value)
+                    }
+
+                    required
+                />
+
+
+                <br />
+                <br />
+
+
+                // Thought label.
+                <label>
+                    What do you want to write?
+                </label>
+
+                <br />
+
+
+                // Textarea allows multiple lines of text.
+                <textarea
+                    style={{
+                        width: "100%",
+                        height: "80px"
+                    }}
+
+                    // Current thought state.
+                    value={thought}
+
+                    // Update thought state.
+                    onChange={(e) =>
+                        setThought(e.target.value)
+                    }
+
+                    placeholder="Write your note"
+
+                    required
+                />
+
+
+                <br />
+                <br />
+
+
+                // Date label.
+                <label>Date:</label>
+
+
+                // Date input.
+                //
+                // The browser will provide a date picker.
+                <input
+                    type="date"
+
+                    // Current date state.
+                    value={date}
+
+                    // Update date state.
+                    onChange={(e) =>
+                        setDate(e.target.value)
+                    }
+
+                    required
+                />
+
+
+                <br />
+                <br />
+
+
+                // =================================================
+                // SUBMIT BUTTON
+                // =================================================
+
+                <button type="submit">
+
+                    // If editing:
+                    //
+                    //     Update Note
+                    //
+                    // Otherwise:
+                    //
+                    //     Done
+                    {
+                        editId
+                            ? "Update Note"
+                            : "Done"
+                    }
+
+                </button>
+
+
+                // =================================================
+                // CANCEL BUTTON
+                // =================================================
+
+                // This button is displayed ONLY when editId
+                // contains a value.
+                //
+                // If editId is null:
+                //
+                //     nothing is displayed.
+                //
+                // If editId = 5:
+                //
+                //     Cancel Edit button appears.
+                {editId && (
+
+                    <button
+                        type="button"
+
+                        // Clicking it clears the form
+                        // and exits edit mode.
+                        onClick={clearForm}
+
+                        style={{
+                            marginLeft: "10px"
+                        }}
+                    >
+                        Cancel Edit
+                    </button>
+
+                )}
+
+            </form>
+
+
+            // Horizontal line separating the form
+            // from the saved notes.
+            <hr />
+
+
+            // =================================================
+            // SAVED NOTES
+            // =================================================
+
+            <h1>Saved Notes</h1>
+
+
+            // Check whether there are any notes.
+            //
+            // notes.length === 0
+            //
+            // means the array contains no notes.
+            {notes.length === 0 ? (
+
+
+                // If there are no notes:
+                <p>No notes found.</p>
+
+
+            ) : (
+
+
+                // If notes exist, display them.
+                <div
+                    style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "15px"
+                    }}
+                >
+
+
+                    // =================================================
+                    // LOOP THROUGH NOTES
+                    // =================================================
+
+                    // map() loops through every note.
+                    //
+                    // For every note, React creates one <div>.
+                    {notes.map((note) => (
+
+
+                        // One card for one note.
+                        //
+                        // key helps React identify each item.
+                        //
+                        // note.id should be unique.
+                        <div
+                            key={note.id}
+                            style={{
+                                border: "1px solid #ccc",
+                                padding: "15px",
+                                borderRadius: "5px"
+                            }}
+                        >
+
+
+                            // Display ID.
+                            <p>
+                                <strong>ID:</strong>
+                                {" "}
+                                {note.id}
+                            </p>
+
+
+                            // Display name.
+                            <p>
+                                <strong>Name:</strong>
+                                {" "}
+                                {note.name}
+                            </p>
+
+
+                            // Display email.
+                            <p>
+                                <strong>Email:</strong>
+                                {" "}
+                                {note.email}
+                            </p>
+
+
+                            // Display thought.
+                            <p>
+                                <strong>Thought:</strong>
+                                {" "}
+                                {note.thought}
+                            </p>
+
+
+                            // Display date.
+                            <p>
+                                <strong>Date:</strong>
+                                {" "}
+                                {note.date}
+                            </p>
+
+
+                            // =================================================
+                            // BUTTONS
+                            // =================================================
+
+                            <div
+                                style={{
+                                    display: "flex",
+                                    gap: "10px",
+                                    marginTop: "10px"
+                                }}
+                            >
+
+
+                                // EDIT BUTTON
+                                //
+                                // When clicked:
+                                //
+                                // startEdit(note)
+                                //
+                                // The complete note object is passed
+                                // to startEdit().
+                                <button
+                                    onClick={() =>
+                                        startEdit(note)
+                                    }
+                                >
+                                    ✏️ Edit
+                                </button>
+
+
+                                // DELETE BUTTON
+                                //
+                                // When clicked:
+                                //
+                                // handleDelete(note.id)
+                                //
+                                // Only the ID is needed for deletion.
+                                <button
+                                    onClick={() =>
+                                        handleDelete(note.id)
+                                    }
+
+                                    style={{
+                                        backgroundColor: "#ff4d4d",
+                                        color: "white"
+                                    }}
+                                >
+                                    🗑️ Delete
+                                </button>
+
+
+                            </div>
+
+                        </div>
+
+                    ))}
+
+                </div>
+
+            )}
+
+        </div>
+    );
+}
+
+
+// Export the component.
+//
+// This allows another file to import AdminPost:
+//
+// import AdminPost from "./AdminPost";
+export default AdminPost;

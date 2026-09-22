@@ -1,12 +1,17 @@
-import axios from "axios";
+import axios from 'axios';
 
-const api = axios.create({
-    baseURL:"http://localhost:3000"
+const API = axios.create({
+  baseURL: 'http://localhost:3000',
 });
 
+// READ (GET all notes)
+export const getPostAdmin = () => API.get('/admin');
 
-//get method
+// CREATE (POST a new note)
+export const createPostAdmin = (noteData) => API.post('/admin', noteData);
 
-export const getPostAdmin = () => {
-    return api.post("/admin")
-};
+// UPDATE (PUT/PATCH an existing note by ID)
+export const updatePostAdmin = (id, updatedData) => API.put(`/admin/${id}`, updatedData);
+
+// DELETE (DELETE a note by ID)
+export const deletePostAdmin = (id) => API.delete(`/admin/${id}`);
