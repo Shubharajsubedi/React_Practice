@@ -1,4 +1,20 @@
 {
+  "Employee": [
+    {
+      "name": "shubham subedi",
+      "email": "subedishubham221@gmail.com",
+      "phoneNumber": "3873873",
+      "department": "it",
+      "id": "qlqsBYmjHNA"
+    },
+    {
+      "name": "Spiderman",
+      "email": "subedishubham221@gmail.com",
+      "phoneNumber": "32332",
+      "department": "finane",
+      "id": "2YypiZCeIcg"
+    }
+  ],
   "admin": [
     {
       "name": "shubharaj ",
