@@ -1,15 +1,18 @@
-import PostEmployee from "../FULL_UI_CRUD/Admin";
-import GetEmployee from "../FULL_UI_CRUD/GetEmployee";
-import EditEmployee from "./Components/EditEmployee";
+import AdminPost from "../DailyNote/AdminPost";
+import EditNote from "../DailyNote/EditNote";
+import GetNote from "../DailyNote/GetNote";
+import { PostNote } from "../Note_Creator/PostNote";
+
 
 
 function App() {
+    
+    
     return (
         <div>
-            <PostEmployee/>
-            <GetEmployee/>
-            <EditEmployee/>
-
+            <AdminPost/>
+            <GetNote/>
+            {/* <PostNote/> */}
         </div>
     );
 }
