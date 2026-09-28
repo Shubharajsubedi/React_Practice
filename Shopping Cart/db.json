@@ -1,0 +1,27 @@
+{
+  "users": [
+    {
+      "username": "shubharaj",
+      "email": "customer@gmail.com",
+      "password": "customer",
+      "role": "customer",
+      "id": "sgSFFGOhQWw"
+    },
+    {
+      "username": "shubharaj",
+      "email": "admin@gmail.com",
+      "password": "admin",
+      "role": "admin",
+      "id": "3QzCjBC3cmE"
+    },
+    {
+      "username": "shubharaj",
+      "email": "admin@gmail.com",
+      "password": "admin",
+      "role": "admin",
+      "id": "0bCyVsDq76E"
+    }
+  ],
+  "products": [],
+  "$schema": "./node_modules/json-server/schema.json"
+}
