@@ -4,6 +4,8 @@ import useLoginStore from "../store/LoginStore"
 import {useNavigate} from "react-router-dom"
 import Navbar from "../components/Navbar"
 import { createUsers} from "../api/UsersApi"
+import { useNotificationStore } from "../store/notificationStore"
+
 
 
 const Login = () => {
@@ -15,6 +17,7 @@ const Login = () => {
     const [users,setUsers] =useState([])
 
     const loginUser = useLoginStore((state) => state.login)
+    const {addNotification} =useNotificationStore()
 
     const navigate = useNavigate();
     
@@ -38,30 +41,24 @@ const Login = () => {
         
 
             if (AuthUser && AuthUser.email === email && AuthUser.password === password) {
-                loginUser(AuthUser); // Saves { username, email, role... } to state.user
+                loginUser(AuthUser); 
 
                 if (AuthUser.role === "admin") {
+                    addNotification("Welcome Admin","success")
                     navigate("/admin")
+                    
                 } else if (AuthUser.role === "customer") {
+                    addNotification("Welcome to my Shopping Cart", "success")
                     navigate("/customer")
+                    
                 }
             } else {
-                alert("You are not authorised.")
+                alert("login failed")
             }
 
         } catch (error) {
            console.log(error) 
         }
-        
-
-        
-    
-    
-
-        
-    
-
-    
 
     }
   return (
@@ -109,11 +106,7 @@ const Login = () => {
             
             <hr />
         </form>
-        <br /><br /><br />
-
-        <h2>Passwords</h2>
-        <p>admin@gmail.com / admin123</p>
-        <p>customer@gmail.com / customer123</p>
+  
     </div>
   )
 }

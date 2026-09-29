@@ -1,8 +1,10 @@
 
 import { Link } from "react-router-dom"
+import Theme from "./Theme"
 const Navbar = () => {
   return (
-    <div className='flex justify-between items-center my-10 px-6'>
+    <>
+      <div className='flex justify-between items-center my-10 px-6'>
         <div className='logo font-bold text-xl'>Login Authentication</div>
         <ul className='bg-black-100 flex gap-4' >
             <Link to={"/home"}><li>Home</li></Link>
@@ -18,9 +20,11 @@ const Navbar = () => {
                   Sign Up
                 </button>
               
-            
+            <Theme/>
           
     </div>
+    </>
+    
   )
 }
 

@@ -1,7 +1,14 @@
+import FetchProducts from "../components/FetchProducts"
+import NavbarForPages from "../components/NavbarForPages"
 
 const CustomerDashboard = () => {
   return (
-    <div>Hello I'm Customer.</div>
+    <>
+      <NavbarForPages/>
+
+      <FetchProducts/>
+    </>
+    
   )
 }
 

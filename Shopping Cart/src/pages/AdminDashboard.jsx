@@ -1,12 +1,12 @@
 
 import useLoginStore from "../store/LoginStore"
 
-import NavbarForPages from "../components/NavbarForPages"
+import NavbarAdmin from "../components/NavbarAdmin"
 
 
 const AdminDashboard = () => {
 
-  const user = useLoginStore((state) => state.user)
+  const user = useLoginStore((state) => state.login)
 
 
 
@@ -14,9 +14,9 @@ const AdminDashboard = () => {
   return (
    
     <div>
-      <NavbarForPages/>
+      <NavbarAdmin/>
 
-      <div>Hello I'm {user.username} Admin</div>
+      <div>Hello I'm {(user.username)} Admin</div>
     
     </div>
     

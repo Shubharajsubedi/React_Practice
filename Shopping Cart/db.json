@@ -20,8 +20,113 @@
       "password": "admin",
       "role": "admin",
       "id": "0bCyVsDq76E"
+    },
+    {
+      "username": "shubharaj",
+      "email": "shubharaj.subedis.24@cps.edu.np",
+      "password": "hello",
+      "role": "customer",
+      "id": "xAdNmM30W_I"
+    },
+    {
+      "username": "shubharaj ",
+      "email": "shubharaj.subedis.24@cps.edu.np",
+      "password": "ajsahj",
+      "role": "admin",
+      "id": "KbAi-2BHjU4"
+    },
+    {
+      "username": "",
+      "email": "",
+      "password": "",
+      "role": "",
+      "id": "haNx2yL27pQ"
+    },
+    {
+      "username": "Shubharaj Subedi",
+      "email": "shubharaj.subedis.24@cps.edu.np",
+      "password": "hey",
+      "role": "admin",
+      "id": "qLCnZnIYOKE"
+    },
+    {
+      "username": "shubharaj",
+      "email": "shubharaj.subedis.24@cps.edu.np",
+      "password": "ahjgashjg",
+      "role": "admin",
+      "id": "yxV1_dpx2-Q"
+    },
+    {
+      "username": "batman",
+      "email": "batman@gmail.com",
+      "password": "batman",
+      "role": "customer",
+      "id": "czmNhWGiiKo"
+    },
+    {
+      "username": "spiderman",
+      "email": "spi@djk.vom",
+      "password": "ahjshas",
+      "role": "admin",
+      "id": "1r7K5hwY9zE"
+    },
+    {
+      "username": "Thanos",
+      "email": "thanos@gmail.com",
+      "password": "heybahsb",
+      "role": "customer",
+      "id": "CYbdSF75Ge4"
+    },
+    {
+      "username": "spiderman",
+      "email": "spidy@gmail.com",
+      "password": "akshhka",
+      "role": "customer",
+      "id": "nMcADxaQAcQ"
+    },
+    {
+      "username": "spidy",
+      "email": "spidy@jnd.cnc",
+      "password": "asjhga",
+      "role": "customer",
+      "id": "I-pmYHwtGiQ"
+    },
+    {
+      "username": "antman",
+      "email": "antman@ash.com",
+      "password": "asbdhjbdkj",
+      "role": "customer",
+      "id": "kPq3nQIsFW8"
+    },
+    {
+      "username": "ajhjga",
+      "email": "shubharaj.subedis.24@cps.edu.np",
+      "password": "sjhgsd",
+      "role": "customer",
+      "id": "6FDY-rhM9qc"
     }
   ],
-  "products": [],
+  "products": [
+    {
+      "productname": "ashja",
+      "productprice": "1212",
+      "id": "Sbw522znN3k"
+    },
+    {
+      "productname": "Nike Jacket",
+      "productprice": "1500",
+      "id": "jApMT9nqjFc"
+    },
+    {
+      "productname": "GoldStar Shoes",
+      "productprice": "2000",
+      "id": "eMN5wBJb1gw"
+    },
+    {
+      "productname": "Diary",
+      "productprice": "300",
+      "id": "49ZdtwMa7CQ"
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }
