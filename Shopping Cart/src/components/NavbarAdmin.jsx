@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom"
 import useLoginStore from "../store/LoginStore"
-import Theme from "./Theme";
+
 
 
 
@@ -13,7 +13,7 @@ const handleLogut = () => {
     navigate("/login")
 }
   return (
-    <div className='flex justify-between items-center my-10 px-6'>
+    <div className='flex justify-between items-center  px-90'>
         <div className='logo font-bold text-xl'>Login Authentication</div>
         <ul className='bg-black-100 flex gap-4' >
             <Link to={"/home"}><li>Home</li></Link>
@@ -27,7 +27,7 @@ const handleLogut = () => {
                 onClick={handleLogut}>
                   Logout
                 </button>
-              <Theme/>
+             
             
           
     </div>

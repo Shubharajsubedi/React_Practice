@@ -1,105 +1,585 @@
+
 import { useEffect, useState } from "react"
-import { getUsers } from "../../api/UsersApi"
+import { deleteUsers, getUsers } from "../../api/UsersApi"
 import { useSearchParams } from "react-router-dom"
 
 const ViewLoginDetails = () => {
-    const [users,setUsers] = useState([])
 
-    const [searchParams,setSearchParams]=useSearchParams();
+    // Store all users
+    const [users, setUsers] = useState([])
+
+    // Get search parameter from URL
+    const [searchParams, setSearchParams] = useSearchParams()
+
     const query = searchParams.get("role") || ""
 
-    const [searchterm, setSearchterm] =useState(query)
+    // Store what user types in search box
+    const [searchterm, setSearchterm] = useState(query)
 
 
-
-
+    // =========================
+    // FETCH USERS
+    // =========================
     useEffect(() => {
-        const fetchLoginDetails = async() => {
+
+        const fetchLoginDetails = async () => {
+
             try {
-                const res = await getUsers();
+
+                const res = await getUsers()
+
+                // Store users from API
                 setUsers(res.data)
-                
+
             } catch (error) {
-                console.log(error)
+
+                console.log("Error occurred:", error)
+
             }
         }
-        fetchLoginDetails();
-    },[])
 
+        fetchLoginDetails()
+
+    }, [])
+
+
+    // =========================
+    // SEARCH
+    // =========================
     const handleSearch = (e) => {
-        e.preventDefault();
-        setSearchParams({
-            role:searchterm
-        });
-    };
 
-    const filteredUsers = users.filter((usr) => 
+        e.preventDefault()
+
+        // Put search value into URL
+        setSearchParams({
+            role: searchterm
+        })
+    }
+
+
+    // =========================
+    // FILTER USERS
+    // =========================
+    const filteredUsers = users.filter((usr) =>
         usr.role
-        .toLowerCase()
-        .includes(query.toLowerCase())
+            ?.toLowerCase()
+            .includes(query.toLowerCase())
     )
 
 
-  return (
-    <div>
-        <div>
-            <h2>Search Users</h2>
-            <form onSubmit={handleSearch}>
-                <label >Search by Role:</label>
+    // =========================
+    // DELETE USER
+    // =========================
+    const deleteUser = async (id) => {
 
-                <input type="text"
-                value={searchterm}
-                onChange={(e)=>setSearchterm(e.target.value)}
-                placeholder="Search by Role." />
-                <br />
+        try {
 
-                <button type="submit">Search</button><br />
-                <button onClick={() => {
-                    setSearchParams({})
-                    searchterm("")
-                    }
-                }>Cancel</button>
+            const res = await deleteUsers(id)
 
-            </form>
-        </div>
-        <table className="border- 2 min-w-full divide-y divide-gray-200"  >
-            <thead>
+            console.log(res.data)
 
-                <tr colSpan = "5">
-                    <th>
-                    <div className="justify-center">
-                            Add Manager
-                    <button>Add</button>
+            // Remove deleted user from frontend
+            setUsers(
+                users.filter((sls) => sls.id !== id)
+            )
+
+        } catch (error) {
+
+            console.log(error)
+
+        }
+    }
+
+
+    return (
+
+        <div className="min-h-screen bg-gray-100 p-6">
+
+            {/* =================================
+                MAIN CONTAINER
+            ================================= */}
+            <div className="mx-auto max-w-7xl">
+
+
+                {/* =================================
+                    PAGE HEADER
+                ================================= */}
+                <div className="mb-8">
+
+                    <h1 className="text-3xl font-bold text-gray-800">
+                        User Management
+                    </h1>
+
+                    <p className="mt-1 text-gray-500">
+                        Search, manage and control registered users
+                    </p>
+
+                </div>
+
+
+                {/* =================================
+                    SEARCH SECTION
+                ================================= */}
+                <div className="mb-6 rounded-xl bg-white p-6 shadow-sm">
+
+                    <div className="mb-5">
+
+                        <h2 className="text-xl font-semibold text-gray-800">
+                            Search Users
+                        </h2>
+
+                        <p className="mt-1 text-sm text-gray-500">
+                            Search users according to their role
+                        </p>
+
                     </div>
-                            </th>
-                    
 
-                </tr>
-                <tr>
-                    <th>Customer Name</th>
-                    <th>Email</th>
-                    <th>Password</th>
-                    <th>Role</th>
-                </tr>
-            </thead>
 
-            <tbody>
-                {filteredUsers&& (filteredUsers.map((sls)=> (
-                    <tr key={sls.id}>
-                        <td>{sls.username}</td>
-                        <td>{sls.email}</td>
-                        <td>{sls.password}</td>
-                        <td>{sls.role}</td>
-                        
-                    </tr>
-                ))
+                    <form
+                        onSubmit={handleSearch}
+                        className="flex flex-col gap-4 md:flex-row md:items-end"
+                    >
 
-                )}
-            </tbody>
-        </table>
+                        {/* Search Input */}
+                        <div className="flex-1">
 
-    </div>
-  )
+                            <label
+                                className="mb-2 block text-sm font-medium text-gray-700"
+                            >
+                                Search by Role
+                            </label>
+
+                            <input
+                                type="text"
+                                value={searchterm}
+                                onChange={(e) =>
+                                    setSearchterm(e.target.value)
+                                }
+                                placeholder="e.g. customer, manager, admin"
+                                className="
+                                    w-full
+                                    rounded-lg
+                                    border
+                                    border-gray-300
+                                    px-4
+                                    py-2.5
+                                    text-gray-700
+                                    outline-none
+                                    transition
+                                    placeholder:text-gray-400
+                                    focus:border-blue-500
+                                    focus:ring-2
+                                    focus:ring-blue-100
+                                "
+                            />
+
+                        </div>
+
+
+                        {/* Search Button */}
+                        <button
+                            type="submit"
+                            className="
+                                rounded-lg
+                                bg-blue-600
+                                px-7
+                                py-2.5
+                                font-medium
+                                text-white
+                                transition
+                                hover:bg-blue-700
+                                active:scale-95
+                            "
+                        >
+                            Search
+                        </button>
+
+
+                        {/* Cancel Button */}
+                        <button
+                            type="button"
+                            onClick={() => {
+
+                                // Remove URL search parameter
+                                setSearchParams({})
+
+                                // Clear input
+                                setSearchterm("")
+
+                            }}
+                            className="
+                                rounded-lg
+                                border
+                                border-gray-300
+                                bg-white
+                                px-7
+                                py-2.5
+                                font-medium
+                                text-gray-700
+                                transition
+                                hover:bg-gray-100
+                                active:scale-95
+                            "
+                        >
+                            Clear
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                {/* =================================
+                    USERS TABLE
+                ================================= */}
+                <div className="overflow-hidden rounded-xl bg-white shadow-sm">
+
+
+                    {/* TABLE HEADER */}
+                    <div
+                        className="
+                            flex
+                            flex-col
+                            gap-4
+                            border-b
+                            border-gray-200
+                            px-6
+                            py-5
+                            sm:flex-row
+                            sm:items-center
+                            sm:justify-between
+                        "
+                    >
+
+                        <div>
+
+                            <h2 className="text-xl font-semibold text-gray-800">
+                                Registered Users
+                            </h2>
+
+                            <p className="mt-1 text-sm text-gray-500">
+                                Total users: {filteredUsers.length}
+                            </p>
+
+                        </div>
+
+
+                        {/* ADD MANAGER BUTTON */}
+                        <button
+                            className="
+                                rounded-lg
+                                bg-green-600
+                                px-5
+                                py-2.5
+                                font-medium
+                                text-white
+                                shadow-sm
+                                transition
+                                hover:bg-green-700
+                                active:scale-95
+                            "
+                        >
+                            + Add Manager
+                        </button>
+
+                    </div>
+
+
+                    {/* TABLE */}
+                    <div className="overflow-x-auto">
+
+                        <table className="min-w-full divide-y divide-gray-200">
+
+
+                            {/* =================================
+                                TABLE HEAD
+                            ================================= */}
+                            <thead className="bg-gray-50">
+
+                                <tr>
+
+                                    <th className="
+                                        px-6
+                                        py-4
+                                        text-left
+                                        text-xs
+                                        font-semibold
+                                        uppercase
+                                        tracking-wider
+                                        text-gray-500
+                                    ">
+                                        Customer Name
+                                    </th>
+
+
+                                    <th className="
+                                        px-6
+                                        py-4
+                                        text-left
+                                        text-xs
+                                        font-semibold
+                                        uppercase
+                                        tracking-wider
+                                        text-gray-500
+                                    ">
+                                        Email
+                                    </th>
+
+
+                                    <th className="
+                                        px-6
+                                        py-4
+                                        text-left
+                                        text-xs
+                                        font-semibold
+                                        uppercase
+                                        tracking-wider
+                                        text-gray-500
+                                    ">
+                                        Password
+                                    </th>
+
+
+                                    <th className="
+                                        px-6
+                                        py-4
+                                        text-left
+                                        text-xs
+                                        font-semibold
+                                        uppercase
+                                        tracking-wider
+                                        text-gray-500
+                                    ">
+                                        Role
+                                    </th>
+
+
+                                    <th className="
+                                        px-6
+                                        py-4
+                                        text-center
+                                        text-xs
+                                        font-semibold
+                                        uppercase
+                                        tracking-wider
+                                        text-gray-500
+                                    ">
+                                        Actions
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            {/* =================================
+                                TABLE BODY
+                            ================================= */}
+                            <tbody className="divide-y divide-gray-100 bg-white">
+
+                                {filteredUsers.map((sls) => (
+
+                                    <tr
+                                        key={sls.id}
+                                        className="
+                                            transition
+                                            hover:bg-gray-50
+                                        "
+                                    >
+
+
+                                        {/* USERNAME */}
+                                        <td className="whitespace-nowrap px-6 py-4">
+
+                                            <div className="flex items-center gap-3">
+
+                                                {/* Avatar */}
+                                                <div
+                                                    className="
+                                                        flex
+                                                        h-10
+                                                        w-10
+                                                        items-center
+                                                        justify-center
+                                                        rounded-full
+                                                        bg-blue-100
+                                                        font-semibold
+                                                        text-blue-600
+                                                    "
+                                                >
+                                                    {sls.username
+                                                        ?.charAt(0)
+                                                        .toUpperCase()}
+                                                </div>
+
+
+                                                {/* Username */}
+                                                <span className="
+                                                    font-medium
+                                                    text-gray-800
+                                                ">
+                                                    {sls.username}
+                                                </span>
+
+                                            </div>
+
+                                        </td>
+
+
+                                        {/* EMAIL */}
+                                        <td className="
+                                            whitespace-nowrap
+                                            px-6
+                                            py-4
+                                            text-sm
+                                            text-gray-600
+                                        ">
+                                            {sls.email}
+                                        </td>
+
+
+                                        {/* PASSWORD */}
+                                        <td className="
+                                            whitespace-nowrap
+                                            px-6
+                                            py-4
+                                            text-sm
+                                            text-gray-500
+                                        ">
+                                            ••••••••
+                                        </td>
+
+
+                                        {/* ROLE */}
+                                        <td className="
+                                            whitespace-nowrap
+                                            px-6
+                                            py-4
+                                        ">
+
+                                            <span
+                                                className="
+                                                    inline-flex
+                                                    rounded-full
+                                                    bg-blue-100
+                                                    px-3
+                                                    py-1
+                                                    text-xs
+                                                    font-semibold
+                                                    text-blue-700
+                                                "
+                                            >
+                                                {sls.role}
+                                            </span>
+
+                                        </td>
+
+
+                                        {/* ACTIONS */}
+                                        <td className="px-6 py-4">
+
+                                            <div className="
+                                                flex
+                                                items-center
+                                                justify-center
+                                                gap-2
+                                            ">
+
+
+                                                {/* EDIT BUTTON */}
+                                                <button
+                                                    className="
+                                                        rounded-lg
+                                                        bg-yellow-100
+                                                        px-4
+                                                        py-2
+                                                        text-sm
+                                                        font-medium
+                                                        text-yellow-700
+                                                        transition
+                                                        hover:bg-yellow-200
+                                                    "
+                                                >
+                                                    Edit
+                                                </button>
+
+
+                                                {/* DELETE BUTTON */}
+                                                <button
+                                                    onClick={() =>
+                                                        deleteUser(sls.id)
+                                                    }
+                                                    className="
+                                                        rounded-lg
+                                                        bg-red-100
+                                                        px-4
+                                                        py-2
+                                                        text-sm
+                                                        font-medium
+                                                        text-red-600
+                                                        transition
+                                                        hover:bg-red-200
+                                                    "
+                                                >
+                                                    Delete
+                                                </button>
+
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+
+                                ))}
+
+
+                                {/* =================================
+                                    NO USERS MESSAGE
+                                ================================= */}
+                                {filteredUsers.length === 0 && (
+
+                                    <tr>
+
+                                        <td
+                                            colSpan="5"
+                                            className="
+                                                px-6
+                                                py-12
+                                                text-center
+                                            "
+                                        >
+
+                                            <div className="text-gray-400">
+
+                                                <p className="text-lg font-medium">
+                                                    No users found
+                                                </p>
+
+                                                <p className="mt-1 text-sm">
+                                                    Try searching for another role.
+                                                </p>
+
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+
+                                )}
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    )
 }
 
 export default ViewLoginDetails
+

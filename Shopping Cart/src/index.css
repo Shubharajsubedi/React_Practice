@@ -1,1 +1,20 @@
 @import "tailwindcss";
+
+
+@theme{
+    --color-ui-bg: var(--bg);
+    --color-ui-text: var(--text);
+    --color-ui-btn: var(--buttoncolor);
+}
+
+:root{
+    --bg: #f8fafc; 
+    --text: #0f272a;
+    --buttoncolor: #2563eb;
+}
+
+[data-theme= "dark"]{
+    --bg:  #0f272a; 
+    --text: #f8fafc;
+    --buttoncolor: #8b5cf6;
+}

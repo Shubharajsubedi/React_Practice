@@ -2,13 +2,6 @@
   "users": [
     {
       "username": "shubharaj",
-      "email": "customer@gmail.com",
-      "password": "customer",
-      "role": "customer",
-      "id": "sgSFFGOhQWw"
-    },
-    {
-      "username": "shubharaj",
       "email": "admin@gmail.com",
       "password": "admin",
       "role": "admin",
@@ -34,13 +27,6 @@
       "password": "ajsahj",
       "role": "admin",
       "id": "KbAi-2BHjU4"
-    },
-    {
-      "username": "",
-      "email": "",
-      "password": "",
-      "role": "",
-      "id": "haNx2yL27pQ"
     },
     {
       "username": "Shubharaj Subedi",
@@ -104,6 +90,27 @@
       "password": "sjhgsd",
       "role": "customer",
       "id": "6FDY-rhM9qc"
+    },
+    {
+      "username": "SHUBHARAJ",
+      "email": "shubharaj.subedis.24@cps.edu.np",
+      "password": "JSKJAS",
+      "role": "ADMIN",
+      "id": "JnFpTdZMS_g"
+    },
+    {
+      "username": "batman",
+      "email": "batman@kas.com",
+      "password": "batman",
+      "role": "customer",
+      "id": "MhAetq5FTFw"
+    },
+    {
+      "username": "spiderman",
+      "email": "spider@home.com",
+      "password": "home",
+      "role": "customer",
+      "id": "Mz9QyDUbl_I"
     }
   ],
   "products": [

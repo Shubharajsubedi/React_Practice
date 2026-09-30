@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom"
 import useLoginStore from "../store/LoginStore"
-import Theme from "./Theme";
+
 
 
 
@@ -27,10 +27,14 @@ const handleLogut = () => {
                 onClick={handleLogut}>
                   Logout
                 </button>
+
+                
               
             
-          <Theme/>
+        
     </div>
+
+    
   )
 }
 
