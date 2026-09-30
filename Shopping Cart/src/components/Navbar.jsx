@@ -19,7 +19,7 @@ const Navbar = () => {
                 </button></Link>
               
                <Link to={"/login"}><button className="bg-purple-700 text-white rounded-full font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 cursor-pointer">
-                  Login in
+                  Login
                 </button></Link> 
               
         

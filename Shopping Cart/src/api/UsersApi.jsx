@@ -11,3 +11,5 @@ export const createUsers = (data) => API.post("/users",data)
 export const updateUsers = (editingid,updated) => API.put(`/users/${editingid}`,updated)
 
 export const deleteUsers = (id) => API.delete(`/users/${id}`)
+
+export const getUser = (id) => API.get(`/users/${id}`);

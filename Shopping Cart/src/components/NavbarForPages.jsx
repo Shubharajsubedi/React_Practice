@@ -1,41 +1,165 @@
+
 import { Link, useNavigate } from "react-router-dom"
 import useLoginStore from "../store/LoginStore"
 
 
-
-
 const NavbarForPages = () => {
-    const loggingout = useLoginStore((state)=>state.logout)
-const navigate = useNavigate();
 
-const handleLogut = () => {
-    loggingout();
-    navigate("/login")
-}
-  return (
-    <div className='flex justify-between items-center my-10 px-6'>
-        <div className='logo font-bold text-xl'>Login Authentication</div>
-        <ul className='bg-black-100 flex gap-4' >
-            <Link to={"/home"}><li>Home</li></Link>
-            <Link to={"/about"}><li>About</li></Link>
-            <Link to={"/services"}><li>Services</li></Link>
-            <Link to={"/contact us"}><li>Contact Us</li></Link>
-        </ul>
-            
-              
-                <button className="bg-purple-700 text-white rounded-full  cursor-pointer"
-                onClick={handleLogut}>
-                  Logout
+    // Get logout function from Zustand
+    const loggingout = useLoginStore((state) => state.logout)
+
+    // Used for navigation
+    const navigate = useNavigate()
+
+
+    // Logout function
+    const handleLogout = () => {
+
+        // Clear logged-in user from Zustand
+        loggingout()
+
+        // Go back to login page
+        navigate("/login")
+    }
+
+
+    return (
+
+        <nav className="
+            sticky
+            top-0
+            z-50
+            w-full
+            border-b
+            border-gray-200
+            bg-white
+            shadow-sm
+        ">
+
+            <div className="
+                mx-auto
+                flex
+                max-w-7xl
+                items-center
+                justify-between
+                px-6
+                py-4
+            ">
+
+
+                {/* =========================
+                    LOGO
+                ========================= */}
+
+                <div className="
+                    text-xl
+                    font-bold
+                    text-purple-700
+                ">
+                    Login Authentication
+                </div>
+
+
+                {/* =========================
+                    NAVIGATION LINKS
+                ========================= */}
+
+                <ul className="
+                    hidden
+                    items-center
+                    gap-8
+                    md:flex
+                ">
+
+                    <li>
+                        <Link
+                            to="/home"
+                            className="
+                                font-medium
+                                text-gray-600
+                                transition
+                                hover:text-purple-700
+                            "
+                        >
+                            Home
+                        </Link>
+                    </li>
+
+
+                    <li>
+                        <Link
+                            to="/about"
+                            className="
+                                font-medium
+                                text-gray-600
+                                transition
+                                hover:text-purple-700
+                            "
+                        >
+                            About
+                        </Link>
+                    </li>
+
+
+                    <li>
+                        <Link
+                            to="/services"
+                            className="
+                                font-medium
+                                text-gray-600
+                                transition
+                                hover:text-purple-700
+                            "
+                        >
+                            Services
+                        </Link>
+                    </li>
+
+
+                    <li>
+                        <Link
+                            to="/contact-us"
+                            className="
+                                font-medium
+                                text-gray-600
+                                transition
+                                hover:text-purple-700
+                            "
+                        >
+                            Contact Us
+                        </Link>
+                    </li>
+
+                </ul>
+
+
+                {/* =========================
+                    LOGOUT BUTTON
+                ========================= */}
+
+                <button
+                    onClick={handleLogout}
+                    className="
+                        rounded-full
+                        bg-purple-700
+                        px-5
+                        py-2
+                        font-medium
+                        text-white
+                        shadow-sm
+                        transition
+                        hover:bg-purple-800
+                        active:scale-95
+                    "
+                >
+                    Logout
                 </button>
 
-                
-              
-            
-        
-    </div>
+            </div>
 
-    
-  )
+        </nav>
+    )
 }
 
 export default NavbarForPages
+

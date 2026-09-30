@@ -23,7 +23,7 @@ const LandingPage = () => {
             ========================= */}
 
             <section className="
-                bg-gradient-to-r
+                bg-linear-to-r
                 from-blue-600
                 to-indigo-700
                 px-6

@@ -1,17 +1,14 @@
 {
   "users": [
     {
-      "username": "shubharaj",
-      "email": "admin@gmail.com",
-      "password": "admin",
-      "role": "admin",
+      "username": "hey",
       "id": "3QzCjBC3cmE"
     },
     {
-      "username": "shubharaj",
-      "email": "admin@gmail.com",
-      "password": "admin",
-      "role": "admin",
+      "username": "hey",
+      "email": "shubharaj.subedis.24@cps.edu.np",
+      "password": "",
+      "role": "",
       "id": "0bCyVsDq76E"
     },
     {
@@ -20,13 +17,6 @@
       "password": "hello",
       "role": "customer",
       "id": "xAdNmM30W_I"
-    },
-    {
-      "username": "shubharaj ",
-      "email": "shubharaj.subedis.24@cps.edu.np",
-      "password": "ajsahj",
-      "role": "admin",
-      "id": "KbAi-2BHjU4"
     },
     {
       "username": "Shubharaj Subedi",
@@ -85,17 +75,10 @@
       "id": "kPq3nQIsFW8"
     },
     {
-      "username": "ajhjga",
-      "email": "shubharaj.subedis.24@cps.edu.np",
-      "password": "sjhgsd",
-      "role": "customer",
-      "id": "6FDY-rhM9qc"
-    },
-    {
       "username": "SHUBHARAJ",
       "email": "shubharaj.subedis.24@cps.edu.np",
-      "password": "JSKJAS",
-      "role": "ADMIN",
+      "password": "shubharaj",
+      "role": "admin",
       "id": "JnFpTdZMS_g"
     },
     {
@@ -111,6 +94,20 @@
       "password": "home",
       "role": "customer",
       "id": "Mz9QyDUbl_I"
+    },
+    {
+      "username": "Thanos",
+      "email": "thanos@gmail.com",
+      "password": "thanos",
+      "role": "customer",
+      "id": "TKZwuYbsM0Y"
+    },
+    {
+      "username": "Thanos",
+      "email": "thanos@gmail.com",
+      "password": "thanos",
+      "role": "customer",
+      "id": "gr-aftNXxAM"
     }
   ],
   "products": [

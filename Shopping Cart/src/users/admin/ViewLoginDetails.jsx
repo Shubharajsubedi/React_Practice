@@ -2,24 +2,27 @@
 import { useEffect, useState } from "react"
 import { deleteUsers, getUsers } from "../../api/UsersApi"
 import { useSearchParams } from "react-router-dom"
+import { useNavigate , Link} from "react-router-dom"
 
 const ViewLoginDetails = () => {
 
-    // Store all users
+    
     const [users, setUsers] = useState([])
 
-    // Get search parameter from URL
     const [searchParams, setSearchParams] = useSearchParams()
 
     const query = searchParams.get("role") || ""
 
-    // Store what user types in search box
     const [searchterm, setSearchterm] = useState(query)
 
+    
+        
+   
+   
 
-    // =========================
-    // FETCH USERS
-    // =========================
+
+  
+   
     useEffect(() => {
 
         const fetchLoginDetails = async () => {
@@ -28,7 +31,7 @@ const ViewLoginDetails = () => {
 
                 const res = await getUsers()
 
-                // Store users from API
+                
                 setUsers(res.data)
 
             } catch (error) {
@@ -42,6 +45,8 @@ const ViewLoginDetails = () => {
 
     }, [])
 
+
+    
 
     // =========================
     // SEARCH
@@ -89,7 +94,7 @@ const ViewLoginDetails = () => {
 
         }
     }
-
+     
 
     return (
 
@@ -487,7 +492,7 @@ const ViewLoginDetails = () => {
 
 
                                                 {/* EDIT BUTTON */}
-                                                <button
+                                                <Link to={`/editingcustomer/${sls.id}`}><button 
                                                     className="
                                                         rounded-lg
                                                         bg-yellow-100
@@ -501,7 +506,7 @@ const ViewLoginDetails = () => {
                                                     "
                                                 >
                                                     Edit
-                                                </button>
+                                                </button></Link>
 
 
                                                 {/* DELETE BUTTON */}

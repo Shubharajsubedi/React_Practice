@@ -4,12 +4,13 @@ import { useState } from "react";
 import Register from "./pages/Register";
 import AdminDashboard from "./pages/AdminDashboard";
 import CustomerDashboard from "./pages/CustomerDashboard";
-import LandingPage from "./pages/landingPage";
+import LandingPage from "./pages/LandingPage";
 import Home from "./components/Home";
 import ViewLoginDetails from "./users/admin/ViewLoginDetails";
 import AddProducts from "./users/admin/AddProducts";
 import About from "./components/About";
 import Login from "./pages/Login";
+import EditCustomer from "./users/admin/EditCustomer";
 
 const App = () => {
 
@@ -51,6 +52,8 @@ const App = () => {
         <Route path="/customer" element={<CustomerDashboard />} />
 
         <Route path="/logindetails" element={<ViewLoginDetails />}/>
+
+        <Route path="/editingcustomer/:id" element ={<EditCustomer/>}/>
 
         <Route path="/addproducts" element={<AddProducts />}/>
 
