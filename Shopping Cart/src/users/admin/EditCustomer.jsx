@@ -74,71 +74,129 @@ const EditCustomer = () => {
 
 
     return (
-        <div>
+       
+<div className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-10">
 
-            <h2>Edit Customer</h2>
+    <div className="w-full max-w-lg bg-white rounded-2xl shadow-lg p-8">
 
-            <form onSubmit={editCustomer}>
+        {/* Page heading */}
+        <div className="mb-8">
+            <h2 className="text-3xl font-bold text-gray-800">
+                Edit Customer
+            </h2>
 
-                <label>Username: </label>
+            <p className="text-gray-500 mt-2">
+                Update the customer's information below.
+            </p>
+        </div>
+
+
+        {/* Form */}
+        <form onSubmit={editCustomer} className="space-y-5">
+
+            {/* Username */}
+            <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Username
+                </label>
 
                 <input
                     type="text"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg 
+                    outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+                    transition"
+                    placeholder="Enter username"
                 />
-
-                <br />
-                <br />
+            </div>
 
 
-                <label>Email: </label>
+            {/* Email */}
+            <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Email
+                </label>
 
                 <input
-                    type="text"
+                    type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg 
+                    outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+                    transition"
+                    placeholder="Enter email"
                 />
-
-                <br />
-                <br />
+            </div>
 
 
-                <label>Password: </label>
+            {/* Password */}
+            <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Password
+                </label>
 
                 <input
-                    type="text"
+                    type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg 
+                    outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+                    transition"
+                    placeholder="Enter password"
                 />
-
-                <br />
-                <br />
+            </div>
 
 
-                <label>Role: </label>
+            {/* Role */}
+            <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Role
+                </label>
 
                 <input
                     type="text"
                     value={role}
                     onChange={(e) => setRole(e.target.value)}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg 
+                    outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+                    transition"
+                    placeholder="Enter role"
                 />
-
-                <br />
-                <br />
+            </div>
 
 
-                <button type="submit">
-                    Update
+            {/* Buttons */}
+            <div className="flex gap-4 pt-4">
+
+                <button
+                    type="submit"
+                    className="flex-1 bg-blue-600 hover:bg-blue-700 
+                    text-white font-semibold py-3 rounded-lg 
+                    transition duration-200 shadow-md hover:shadow-lg"
+                >
+                    Update Customer
                 </button>
 
-            </form>
+                <button
+                    type="button"
+                    onClick={() => navigate("/admin")}
+                    className="flex-1 bg-gray-200 hover:bg-gray-300 
+                    text-gray-700 font-semibold py-3 rounded-lg 
+                    transition duration-200"
+                >
+                    Cancel
+                </button>
 
-            <button onClick={() => navigate("/admin")}>
-                Cancel
-            </button>
+            </div>
 
-        </div>
+        </form>
+
+    </div>
+
+</div>
+
+
     )
 }
 

@@ -82,9 +82,7 @@ const FetchProducts = () => {
 
         <div className="min-h-screen bg-gray-100 p-6">
 
-            {/* --------------------------------
-                SEARCH SECTION
-            -------------------------------- */}
+            
             <div className="mx-auto mb-8 max-w-7xl rounded-xl bg-white p-6 shadow-sm">
 
                 <form onSubmit={handlesubmit}>

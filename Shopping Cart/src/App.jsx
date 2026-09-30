@@ -11,6 +11,7 @@ import AddProducts from "./users/admin/AddProducts";
 import About from "./components/About";
 import Login from "./pages/Login";
 import EditCustomer from "./users/admin/EditCustomer";
+import Contactus from "./components/Contactus";
 
 const App = () => {
 
@@ -58,6 +59,8 @@ const App = () => {
         <Route path="/addproducts" element={<AddProducts />}/>
 
         <Route path="/about" element={<About />}/>
+        
+        <Route path="/contactus" element={<Contactus/>}/>
 
       </Routes>
 
