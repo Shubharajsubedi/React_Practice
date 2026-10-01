@@ -103,7 +103,7 @@ const NavbarForPages = () => {
 
                     <li>
                         <Link
-                            to="/services"
+                            to="/cart"
                             className="
                                 font-medium
                                 text-gray-600
@@ -111,7 +111,7 @@ const NavbarForPages = () => {
                                 hover:text-purple-700
                             "
                         >
-                            Services
+                           Cart
                         </Link>
                     </li>
 

@@ -2,30 +2,26 @@
 import { useEffect, useState } from "react"
 import { getProducts } from "../api/ProductsApi"
 import { useSearchParams } from "react-router-dom"
+import useCardStore from "../store/CardStore.js"
+import {useNavigate} from "react-router-dom"
 
 const FetchProducts = () => {
 
-    // --------------------------------
-    // 1. Store all products
-    // --------------------------------
     const [products, setProducts] = useState([])
 
-    // --------------------------------
-    // 2. Get search value from URL
-    // Example:
-    // /products?productname=shirt
-    // --------------------------------
+
     const [searchParams, setSearchParams] = useSearchParams()
 
     const query = searchParams.get("productname") || ""
 
-    // Search input value
+   
     const [searchterm, setSearchterm] = useState(query)
 
+    const {addtocart} = useCardStore();
 
-    // --------------------------------
-    // 3. Search button
-    // --------------------------------
+    const navigate = useNavigate()
+  
+
     const handlesubmit = (e) => {
         e.preventDefault()
 
@@ -34,11 +30,6 @@ const FetchProducts = () => {
             productname: searchterm
         })
     }
-
-
-    // --------------------------------
-    // 4. Filter products
-    // --------------------------------
     const filteredProducts = products.filter((sls) => {
 
         return sls.productname
@@ -236,7 +227,10 @@ const FetchProducts = () => {
 
                             {/* Add To Cart */}
                             <button
-                                type="button"
+                                onClick = {() => {addtocart(sls)
+                                    navigate("/cart")
+                                }
+                                }
                                 className="
                                     mt-4
                                     w-full

@@ -8,7 +8,7 @@
       "username": "hey",
       "email": "shubharaj.subedis.24@cps.edu.np",
       "password": "",
-      "role": "",
+      "role": "customer",
       "id": "0bCyVsDq76E"
     },
     {
@@ -108,6 +108,13 @@
       "password": "thanos",
       "role": "customer",
       "id": "gr-aftNXxAM"
+    },
+    {
+      "username": "Superman",
+      "email": "superman@gmail.com",
+      "password": "superman",
+      "role": "customer",
+      "id": "JvBWIwykJMQ"
     }
   ],
   "products": [

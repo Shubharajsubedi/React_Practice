@@ -13,22 +13,11 @@ const Login = () => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-
    
     const [error, setError] = useState("")
-
-
     const [loading, setLoading] = useState(false)
-
-
- 
     const loginUser = useLoginStore((state) => state.login)
-
-    
     const { addNotification } = useNotificationStore()
-
-
-
 
     const navigate = useNavigate()
 
@@ -36,14 +25,9 @@ const Login = () => {
     
 
     const handleLogin = async (e) => {
-
-       
         e.preventDefault()
 
         setError("")
-
-
-       
 
         if (!email || !password) {
 
@@ -51,53 +35,24 @@ const Login = () => {
 
             return
         }
-
-
-        try {
-
-           
+        try {  
             setLoading(true)
-
-
-            
             const res = await getUsers()
-
             const users = res.data
-
-
-           
             const user = users.find(
                 (usr) =>
-                    usr.email.toLowerCase() === email.toLowerCase() &&
+                    usr.email === email &&
                     usr.password === password
             )
-            
-
-
-           
-
             if (!user) {
 
                 setError("Invalid email or password.")
-
                 addNotification("Invalid email or password.")
-
                 return
             }
-
-
-            
             console.log("Logged in user:", user)
-
-
-           
             loginUser(user)
-
-
-            
             addNotification(`Welcome ${user.username}!`)
-
-
          
             if (user.role === "customer") {
 

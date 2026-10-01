@@ -1,7 +1,7 @@
 
-import useLoginStore from "../store/LoginStore"
+import useLoginStore from "../../store/LoginStore"
 
-import NavbarAdmin from "../components/NavbarAdmin"
+import NavbarAdmin from "../../components/NavbarAdmin"
 
 
 const AdminDashboard = () => {

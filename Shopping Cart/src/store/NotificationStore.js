@@ -4,7 +4,7 @@ export const useNotificationStore = create((set) => ({
 
     notifications: [],
 
-    addNotification: (message, type = "success") => {
+    addNotification: (message) => {
 
         const id = Date.now()
 
@@ -13,8 +13,7 @@ export const useNotificationStore = create((set) => ({
                 ...state.notifications,
                 {
                     
-                    message,
-                    type
+                    message
                 }
             ]
         }))
