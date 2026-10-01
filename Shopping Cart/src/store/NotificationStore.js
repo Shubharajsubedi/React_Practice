@@ -6,7 +6,7 @@ export const useNotificationStore = create((set) => ({
 
     addNotification: (message) => {
 
-        const id = Date.now()
+        
 
         set((state) => ({
             notifications: [
@@ -18,32 +18,9 @@ export const useNotificationStore = create((set) => ({
             ]
         }))
 
-        setTimeout(() => {
+        
 
-            set((state) => ({
-                notifications: state.notifications.filter(
-                    (notification) => notification.id !== id
-                )
-            }))
-
-        }, 3000)
-    },
-
-    removeNotification: (id) => {
-
-        set((state) => ({
-            notifications: state.notifications.filter(
-                (notification) => notification.id !== id
-            )
-        }))
-
-    },
-
-    clearNotifications: () => {
-
-        set({
-            notifications: []
-        })
+   
 
     }
 

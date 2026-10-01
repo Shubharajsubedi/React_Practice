@@ -10,6 +10,14 @@ const usePayStore = create((set) => ({
                 ...state.pay,sales
             ]
         }))
+    },
+
+    deleteSales:  (id) => {
+        set((state) => ({
+            pay: state.pay.filter(
+                (sls) => sls.id !== id
+            )
+        }))
     }
 }))
 

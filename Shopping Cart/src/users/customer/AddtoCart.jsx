@@ -2,12 +2,14 @@
 import { useNavigate } from "react-router-dom";
 import { useCartStore } from "../../store/CartStore"
 import usePayStore from "../../store/PayStore"
+import { useNotificationStore } from "../../store/notificationStore";
 
 
 const AddtoCart = () => {
 
     // Get cart data from Zustand
-    const { cart } = useCartStore()
+    const { cart ,removeFromCart } = useCartStore()
+    const {addNotification} = useNotificationStore()
 
 
    const  {viewSales} = usePayStore();
@@ -71,14 +73,18 @@ const AddtoCart = () => {
                                 Rs. {product.productprice}
                             </p>
                             <button onClick={() => {viewSales(product) 
+                                addNotification("products added")
                                 navigate("/purchased")}  }>Pay</button>
+                                
+                                <button onClick={() =>  removeFromCart(product.id) 
+                                    }>Cancel</button>
 
                         </div>
 
                     ))}
 
                     
-                    <button >Cancel</button>
+                    
 
                 </div>
 

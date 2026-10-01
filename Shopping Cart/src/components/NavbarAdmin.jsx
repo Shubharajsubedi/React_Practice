@@ -5,8 +5,8 @@ import useLoginStore from "../store/LoginStore"
 
 
 const NavbarAdmin = () => {
-    const loggingout = useLoginStore((state)=>state.logout)
-const navigate = useNavigate();
+  const loggingout = useLoginStore((state)=>state.logout)
+  const navigate = useNavigate();
 
 const handleLogut = () => {
     loggingout();

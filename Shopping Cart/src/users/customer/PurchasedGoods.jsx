@@ -1,9 +1,11 @@
 
+import { useNotificationStore } from "../../store/notificationStore";
 import usePayStore from "../../store/PayStore"
 
 
 const PurchasedGoods = () => {
-   const {pay} = usePayStore();
+   const {pay , deleteSales} = usePayStore();
+   const {addNotification} = useNotificationStore()
   return (
     <div>
         <h1> Purchsed Goods.</h1>
@@ -18,8 +20,12 @@ const PurchasedGoods = () => {
                     <div key={sale.id}>
                         <h2>{sale.productname}</h2>
                         <h3>Rs.{sale.productprice}</h3>
+                        <button onClick={() => {deleteSales(sale.id)
+                            addNotification("deleted")}}> Remove</button>
+                        
                     </div>
                 ))}
+                
             </div>
         )}
 

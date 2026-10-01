@@ -14,29 +14,31 @@ import EditCustomer from "./users/admin/EditCustomer";
 import Contactus from "./components/Contactus";
 import AddtoCart from "./users/customer/AddtoCart";
 import PurchasedGoods from "./users/customer/PurchasedGoods";
+import ViewSales from "./users/admin/ViewSales";
+import useThemeStore from "./store/ThemeStore";
 
 const App = () => {
 
  
-  const [darkMode, setDarkMode] = useState(false);
+  const {theme,setTheme} = useThemeStore()
 
   return (
 
     
     <div
       className={
-        darkMode
-          ? "dark min-h-screen bg-gray-900 text-white"
-          : "min-h-screen bg-white text-black"
+        theme
+          ? "dark min-h-screen bg-white text-black"
+          : "min-h-screen bg-gray-900 text-white"
       }
     >
 
    
       <button
-        onClick={() => setDarkMode(!darkMode)}
+        onClick={() => setTheme(!theme)}
         className="fixed right-10 top-5 z-50 rounded-lg bg-blue-600 px-4 py-2 text-white"
       >
-        {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
+        {theme ? "Light" : "Dark"}
       </button>
 
 
@@ -67,6 +69,8 @@ const App = () => {
         <Route path ="/cart" element={<AddtoCart/>}/>
         
         <Route path= "/purchased" element= {<PurchasedGoods/>}/>
+        
+        <Route path="/viewsales" element = {<ViewSales/>}/>
 
       </Routes>
 
