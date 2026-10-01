@@ -2,8 +2,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 
 import Register from "./pages/Register";
-import AdminDashboard from "./pages/AdminDashboard";
-import CustomerDashboard from "./pages/CustomerDashboard";
+import AdminDashboard from "./users/admin/AdminDashboard";
+import CustomerDashboard from "./users/customer/CustomerDashboard";
 import LandingPage from "./pages/LandingPage";
 import Home from "./components/Home";
 import ViewLoginDetails from "./users/admin/ViewLoginDetails";
@@ -12,6 +12,8 @@ import About from "./components/About";
 import Login from "./pages/Login";
 import EditCustomer from "./users/admin/EditCustomer";
 import Contactus from "./components/Contactus";
+import AddtoCart from "./users/customer/AddtoCart";
+import PurchasedGoods from "./users/customer/PurchasedGoods";
 
 const App = () => {
 
@@ -61,6 +63,10 @@ const App = () => {
         <Route path="/about" element={<About />}/>
         
         <Route path="/contactus" element={<Contactus/>}/>
+        
+        <Route path ="/cart" element={<AddtoCart/>}/>
+        
+        <Route path= "/purchased" element= {<PurchasedGoods/>}/>
 
       </Routes>
 

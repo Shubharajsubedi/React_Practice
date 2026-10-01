@@ -2,7 +2,7 @@
 import usePayStore from "../../store/PayStore"
 
 
-const ViewSales = () => {
+const PurchasedGoods = () => {
    const {pay} = usePayStore();
   return (
     <div>
@@ -17,7 +17,7 @@ const ViewSales = () => {
                 {pay.map((sale) => (
                     <div key={sale.id}>
                         <h2>{sale.productname}</h2>
-                        <h3>{sale.parductprice}</h3>
+                        <h3>Rs.{sale.productprice}</h3>
                     </div>
                 ))}
             </div>
@@ -29,4 +29,4 @@ const ViewSales = () => {
   )
 }
 
-export default ViewSales
+export default PurchasedGoods

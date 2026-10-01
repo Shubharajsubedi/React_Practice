@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react"
 import { getProducts } from "../api/ProductsApi"
 import { useSearchParams } from "react-router-dom"
-import useCardStore from "../store/CardStore.js"
+import { useCartStore } from "../store/CartStore"
 import {useNavigate} from "react-router-dom"
 
 const FetchProducts = () => {
@@ -17,7 +17,7 @@ const FetchProducts = () => {
    
     const [searchterm, setSearchterm] = useState(query)
 
-    const {addtocart} = useCardStore();
+    const {addToCart} = useCartStore();
 
     const navigate = useNavigate()
   
@@ -227,7 +227,7 @@ const FetchProducts = () => {
 
                             {/* Add To Cart */}
                             <button
-                                onClick = {() => {addtocart(sls)
+                                onClick = {() => {addToCart(sls)
                                     navigate("/cart")
                                 }
                                 }

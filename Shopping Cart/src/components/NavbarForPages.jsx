@@ -130,6 +130,20 @@ const NavbarForPages = () => {
                         </Link>
                     </li>
 
+                    <li>
+                        <Link
+                            to="/purchased"
+                            className="
+                                font-medium
+                                text-gray-600
+                                transition
+                                hover:text-purple-700
+                            "
+                        >
+                            Purchsed Goods
+                        </Link>
+                    </li>
+
                 </ul>
 
 
