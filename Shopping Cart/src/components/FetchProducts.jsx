@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { getProducts } from "../api/ProductsApi"
 import { useSearchParams } from "react-router-dom"
 import { useCartStore } from "../store/CartStore"
-import {useNavigate} from "react-router-dom"
+
 
 const FetchProducts = () => {
 
@@ -19,7 +19,7 @@ const FetchProducts = () => {
 
     const {addToCart} = useCartStore();
 
-    const navigate = useNavigate()
+   
   
 
     const handlesubmit = (e) => {
@@ -228,7 +228,7 @@ const FetchProducts = () => {
                             {/* Add To Cart */}
                             <button
                                 onClick = {() => {addToCart(sls)
-                                    navigate("/cart")
+                                    
                                 }
                                 }
                                 className="

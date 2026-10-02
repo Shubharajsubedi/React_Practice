@@ -2,14 +2,15 @@
 
 import { useState } from "react"
 import { Link } from "react-router-dom"
+import FetchProducts from "./FetchProducts"
+import Navbar from "./Navbar"
 
 const Home = () => {
 
-    // Store the search text
     const [search, setSearch] = useState("")
 
 
-    // Categories
+   
     const categories = [
         {
             name: "Electronics",
@@ -34,43 +35,19 @@ const Home = () => {
     ]
 
 
-    // Featured products
-    const products = [
-        {
-            id: 1,
-            name: "Wireless Headphones",
-            price: 2500,
-            icon: "🎧"
-        },
-        {
-            id: 2,
-            name: "Smart Watch",
-            price: 4500,
-            icon: "⌚"
-        },
-        {
-            id: 3,
-            name: "Running Shoes",
-            price: 3500,
-            icon: "👟"
-        },
-        {
-            id: 4,
-            name: "Laptop",
-            price: 85000,
-            icon: "💻"
-        }
-    ]
+    
 
 
     return (
 
+
+
         <div className="min-h-screen bg-gray-50">
 
+            <Navbar/>
+            
 
-            {/* ================= HERO SECTION ================= */}
-
-            <section className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white">
+            <section className="bg-linear-to-r from-blue-600 to-indigo-700 text-white">
 
                 <div className="max-w-7xl mx-auto px-6 py-20">
 
@@ -121,12 +98,12 @@ const Home = () => {
                             </div>
 
 
-                            {/* Shop Button */}
+                            
 
                             <div className="mt-6">
 
                                 <Link
-                                    to="/products"
+                                    to="/customer"
                                     className="inline-block bg-yellow-400
                                     hover:bg-yellow-300 text-gray-900
                                     font-bold px-8 py-3 rounded-lg
@@ -248,62 +225,7 @@ const Home = () => {
                     </div>
 
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
-                        {products.map((product) => (
-
-                            <div
-                                key={product.id}
-                                className="bg-white rounded-2xl overflow-hidden
-                                shadow-md hover:shadow-xl
-                                transition duration-300
-                                hover:-translate-y-2"
-                            >
-
-                                {/* Product Image */}
-
-                                <div className="h-48 bg-gray-100
-                                    flex items-center justify-center">
-
-                                    <span className="text-8xl">
-                                        {product.icon}
-                                    </span>
-
-                                </div>
-
-
-                                {/* Product Information */}
-
-                                <div className="p-5">
-
-                                    <h3 className="text-lg font-bold text-gray-800">
-                                        {product.name}
-                                    </h3>
-
-                                    <div className="flex justify-between items-center mt-4">
-
-                                        <span className="text-xl font-bold text-blue-600">
-                                            NPR {product.price.toLocaleString()}
-                                        </span>
-
-                                        <button
-                                            className="bg-blue-600
-                                            hover:bg-blue-700
-                                            text-white px-4 py-2
-                                            rounded-lg transition"
-                                        >
-                                            🛒 Add
-                                        </button>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        ))}
-
-                    </div>
+                    <FetchProducts/>
 
                 </div>
 
@@ -311,11 +233,10 @@ const Home = () => {
 
 
 
-            {/* ================= PROMOTION ================= */}
-
+            
             <section className="max-w-7xl mx-auto px-6 py-16">
 
-                <div className="bg-gradient-to-r from-indigo-600 to-purple-600
+                <div className="bg-linear-to-r from-indigo-600 to-purple-600
                     rounded-3xl p-10 md:p-16 text-white
                     flex flex-col md:flex-row
                     justify-between items-center gap-8">
@@ -353,7 +274,7 @@ const Home = () => {
 
 
 
-            {/* ================= FOOTER ================= */}
+           
 
             <footer className="bg-gray-900 text-gray-300">
 

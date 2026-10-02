@@ -1,17 +1,19 @@
 
 import { useState } from "react"
+import Navbar from "./Navbar"
 
 const About = () => {
 
-    // Used to show/hide extra information
+    
     const [showMore, setShowMore] = useState(false)
 
     return (
         <div className="min-h-screen bg-gray-50">
+            <Navbar/>
 
-            {/* ================= HERO SECTION ================= */}
+           
 
-            <section className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white">
+            <section className="bg-linear-to-r from-blue-600 to-indigo-700 text-white">
 
                 <div className="max-w-7xl mx-auto px-6 py-20 text-center">
 

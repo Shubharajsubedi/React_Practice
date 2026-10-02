@@ -1,13 +1,17 @@
 
 import { create } from "zustand"
+import { persist } from "zustand/middleware"
 
-const usePayStore = create((set) => ({
+const usePayStore = create(
+    persist(
+        (set) => ({
+    
     pay:[],
 
     viewSales: (sales) => {
         set((state) => ({
             pay: [
-                ...state.pay,sales
+                ...state.pay,...sales
             ]
         }))
     },
@@ -19,6 +23,11 @@ const usePayStore = create((set) => ({
             )
         }))
     }
-}))
+}),
+{
+    name:"payments"
+}
+
+))
 
 export default usePayStore

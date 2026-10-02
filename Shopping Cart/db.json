@@ -139,5 +139,14 @@
       "id": "49ZdtwMa7CQ"
     }
   ],
+  "payment": [
+    {
+      "productname": "",
+      "productprice": "",
+      "productimage": "",
+      "id": "tdSsTgHf7eI"
+    }
+    
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }

@@ -11,7 +11,7 @@ const ViewLoginDetails = () => {
 
     const [searchParams, setSearchParams] = useSearchParams()
 
-    const query = searchParams.get("role") || ""
+    const query = searchParams.get("q") || ""
 
     const [searchterm, setSearchterm] = useState(query)
 
@@ -57,7 +57,7 @@ const ViewLoginDetails = () => {
 
         // Put search value into URL
         setSearchParams({
-            role: searchterm
+            q: searchterm
         })
     }
 
@@ -66,9 +66,8 @@ const ViewLoginDetails = () => {
     // FILTER USERS
     // =========================
     const filteredUsers = users.filter((usr) =>
-        usr.role
-            ?.toLowerCase()
-            .includes(query.toLowerCase())
+        usr.role?.toLowerCase()
+            .includes(query.toLowerCase()) || usr.username?.toLowerCase().includes(query.toLowerCase())
     )
 
 
@@ -100,15 +99,11 @@ const ViewLoginDetails = () => {
 
         <div className="min-h-screen bg-gray-100 p-6">
 
-            {/* =================================
-                MAIN CONTAINER
-            ================================= */}
+           
             <div className="mx-auto max-w-7xl">
 
 
-                {/* =================================
-                    PAGE HEADER
-                ================================= */}
+               
                 <div className="mb-8">
 
                     <h1 className="text-3xl font-bold text-gray-800">
@@ -122,9 +117,7 @@ const ViewLoginDetails = () => {
                 </div>
 
 
-                {/* =================================
-                    SEARCH SECTION
-                ================================= */}
+                
                 <div className="mb-6 rounded-xl bg-white p-6 shadow-sm">
 
                     <div className="mb-5">
