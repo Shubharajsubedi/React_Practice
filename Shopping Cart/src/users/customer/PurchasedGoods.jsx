@@ -6,6 +6,7 @@ import usePayStore from "../../store/PayStore"
 const PurchasedGoods = () => {
    const {pay , deleteSales} = usePayStore();
    const {addNotification} = useNotificationStore()
+   
   return (
     <div>
         <h1 className="text-5xl "> Purchsed Goods.</h1>

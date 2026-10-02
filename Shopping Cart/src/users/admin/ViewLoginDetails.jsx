@@ -15,12 +15,6 @@ const ViewLoginDetails = () => {
 
     const [searchterm, setSearchterm] = useState(query)
 
-    
-        
-   
-   
-
-
   
    
     useEffect(() => {
@@ -227,9 +221,7 @@ const ViewLoginDetails = () => {
                 </div>
 
 
-                {/* =================================
-                    USERS TABLE
-                ================================= */}
+                
                 <div className="overflow-hidden rounded-xl bg-white shadow-sm">
 
 

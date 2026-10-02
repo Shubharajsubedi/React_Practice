@@ -7,6 +7,7 @@ import FetchProducts from "../../components/FetchProducts"
 const AddProducts = () => {
     const [productname,setProductname]=useState("")
     const [productprice,setProductprice]= useState("")
+   
 
     const [productdetails, setProductdetails]=useState([])
     
@@ -15,7 +16,8 @@ const AddProducts = () => {
       e.preventDefault()
       const payload = {
             productname,
-            productprice
+            productprice,
+           
           }
       try {
         const res = await createProducts(payload)
@@ -24,6 +26,7 @@ const AddProducts = () => {
         
         setProductname("")
         setProductprice("")
+        
 
         
       } catch (error) {
