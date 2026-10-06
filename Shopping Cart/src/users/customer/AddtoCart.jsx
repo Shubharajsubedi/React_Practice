@@ -3,14 +3,17 @@ import { useCartStore } from '../../store/CartStore';
 import usePayStore from '../../store/PayStore';
 import useCountStore from '../../store/CountStore';
 import { useState, useCallback } from 'react';
+import { Navigate } from 'react-router-dom';
 
 
 const AddtoCart = () => {
   const { cart, removeFromCart } = useCartStore();
-  // const navigate = useNavigate();
-  // const { viewSales } = usePayStore();
+  // const { counts,increament,decreament} = useCountStore();
+  const navigate = useNavigate();
+  const { viewSales } = usePayStore();
   // const {productCount, increaseCount, decreaseCount} = useCountStore();
   const [count, setCount] = useState({});
+
   
 
   // const getCount = useCallback((id) => {
@@ -31,28 +34,37 @@ const AddtoCart = () => {
 
   //   return sum;
   // };
-
+     const getQuantity = (id) => count[id] || 1;
 
   const Increament = (id) => {
-    const currentvlaue = count[id] || 1;
-
-    setCount({
-      ...count,
-      [id]: currentvlaue + 1
-    });
+    setCount((prev) => ({
+      ...prev, [id]: (prev[id] || 1) +1,
+    }))
   }
-
 
   const Decreament = (id) => {
-    const currentvlaue = count[id] || 1;
+    setCount((prev) => {
+      const qnty = prev[id] || 1;
+      
+      if(qnty <= 1) return prev;
 
-    if (currentvlaue > 1) {
-      setCount({
-        ...count,
-        [id]: currentvlaue - 1
-      });
-    }
-  }
+      return {
+        ...prev,[id]:qnty-1
+      };
+      
+    });
+  };
+
+
+  const getTotal = (pdt) => {
+   return (+pdt.productprice) * (getQuantity(pdt.id));
+  };
+
+  const grandtotal = cart.reduce((sum,pdt) => {
+    return sum + getTotal(pdt);
+
+  },0)
+
 
 
   return (
@@ -122,6 +134,7 @@ const AddtoCart = () => {
 
               // Get quantity of the current product
               const quantity = count[pdt.id] || 1;
+              
 
               return (
                 <tr key={pdt.id}>
@@ -179,9 +192,13 @@ const AddtoCart = () => {
         </table>
       </div>
 
-      <h3 className="mt-5 text-xl font-bold">
-        Total Price: $
-      </h3>
+      
+        <div>
+          <h3>Total Price: RS {grandtotal}</h3>
+          <button onClick={() => { viewSales(cart) 
+            navigate("/purchased")}}>Pay</button>
+        </div>
+    
 
 
       {/* {cart.length > 0 && (

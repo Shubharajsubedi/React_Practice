@@ -1,11 +1,14 @@
 
-import { useNotificationStore } from "../../store/notificationStore";
+
+
 import usePayStore from "../../store/PayStore"
 
 
 const PurchasedGoods = () => {
    const {pay , deleteSales} = usePayStore();
-   const {addNotification} = useNotificationStore()
+   
+  
+   
    
   return (
     <div>
@@ -36,7 +39,7 @@ const PurchasedGoods = () => {
                         <td className="px-6 py-4 font-medium text-gray-900">{sls.quantity}</td>
                         <td className="px-6 py-4 font-medium text-gray-900">{sls.totalprice}</td>
                         <td className="px-6 py-4 font-medium text-gray-900"><button onClick={() => {deleteSales(sls.id)
-                            addNotification("deleted")}}> Remove</button></td>
+                            }}> Remove</button></td>
                         
                     </tr>
                 ))}
