@@ -3,7 +3,7 @@ import { useCartStore } from '../../store/CartStore';
 import usePayStore from '../../store/PayStore';
 import useCountStore from '../../store/CountStore';
 import { useState, useCallback } from 'react';
-import { Navigate } from 'react-router-dom';
+
 
 
 const AddtoCart = () => {
@@ -34,7 +34,7 @@ const AddtoCart = () => {
 
   //   return sum;
   // };
-     const getQuantity = (id) => count[id] || 1;
+    const getQuantity = (id) => count[id] || 1;
 
   const Increament = (id) => {
     setCount((prev) => ({
@@ -64,6 +64,22 @@ const AddtoCart = () => {
     return sum + getTotal(pdt);
 
   },0)
+
+  const handlePay = () =>  {
+    const purchasedItems = cart.map((pdt) => {
+      const quantity = count[pdt.id] || 1;
+      const totalprice = Number(pdt.productprice) * quantity
+
+      return{
+        ...pdt,
+        quantity: quantity,
+        totalprice: totalprice
+      }
+    });
+    viewSales(purchasedItems)
+    navigate("/purchased")
+
+  }
 
 
 
@@ -195,8 +211,7 @@ const AddtoCart = () => {
       
         <div>
           <h3>Total Price: RS {grandtotal}</h3>
-          <button onClick={() => { viewSales(cart) 
-            navigate("/purchased")}}>Pay</button>
+          <button onClick={() => { handlePay()}}>Pay</button>
         </div>
     
 
