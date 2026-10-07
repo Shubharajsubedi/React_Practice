@@ -1,8 +1,10 @@
 
-import { create } from "zustand"
+import { create} from "zustand"
+import { persist } from "zustand/middleware"
 
 
 const usePayStore = create(
+   persist(
     
         (set) => ({
     
@@ -26,6 +28,6 @@ const usePayStore = create(
 }),
 
 
-)
+))
 
 export default usePayStore

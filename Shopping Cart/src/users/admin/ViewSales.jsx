@@ -14,8 +14,6 @@ const ViewSales = () => {
                try {
    
                    const res = await getUsers()
-   
-                   
                    setUsers(res.data)
    
                } catch (error) {
@@ -28,6 +26,7 @@ const ViewSales = () => {
            fetchLoginDetails()
    
        }, [])
+       
   return (
     <div>
         
@@ -54,18 +53,20 @@ const ViewSales = () => {
                     </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
-                    {users && pay.map((sls) => (
+                    {users && pay.map((sls) => {
+                        const user = users.find((usr) => usr.username === sls.username)
+                        return(
                     <tr key={sls.id}>
                         <td className="px-6 py-4 font-medium text-gray-900">{sls.productname}</td>
                         <td className="px-6 py-4 font-medium text-gray-900">Rs.{sls.productprice}</td>
                         <td className="px-6 py-4 font-medium text-gray-900">{sls.quantity}</td>
                         <td className="px-6 py-4 font-medium text-gray-900">{sls.totalprice}</td>
-                        <td className="px-6 py-4 font-medium text-gray-900">{sls.username}</td>
+                        <td className="px-6 py-4 font-medium text-gray-900">{user}</td>
                         <td className="px-6 py-4 font-medium text-gray-900"><button onClick={() => {deleteSales(sls.id)
                            }}> Remove</button></td>
                         
-                    </tr>
-                ))}
+                    </tr>)
+                })}
                 </tbody>
                 
                 

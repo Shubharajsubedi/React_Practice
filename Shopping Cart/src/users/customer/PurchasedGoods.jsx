@@ -7,8 +7,10 @@ import usePayStore from "../../store/PayStore"
 const PurchasedGoods = () => {
    const {pay , deleteSales} = usePayStore();
    
-  
-   
+    
+   const totalSum = pay.reduce((sum,item) => 
+    sum + Number(item.totalprice),0
+   )
    
   return (
     <div>
@@ -50,6 +52,12 @@ const PurchasedGoods = () => {
             </div>
             
         )}
+
+       <div>
+        <h2>Total Sum of all Products:</h2>
+        <p>{totalSum}</p>
+       </div>
+         
 
        
     </div>
